@@ -8,3 +8,7 @@ Hello wolrd of tictactoe with typescript
 ## Second
 
 `npm run dev`
+
+## End
+
+Open the `index.html` for visualization, just for fun.
