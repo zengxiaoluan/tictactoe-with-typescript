@@ -8,18 +8,23 @@ enum ChessTypeClass {
   One = 'one',
 }
 
-class Chess {
+interface primitiveChess {
+  drawBoard: (parent: HTMLElement) => void,
+  whoWin: (row: number, col: number) => void
+}
+
+class Chess implements primitiveChess {
   private row: number
   private col: number
   private turn: ChessType = ChessType.Zero
   private data: number[][] = []
 
-  constructor(row: number, col: number) {
+  constructor(row: number = 3, col: number = 3) {
     this.row = row;
     this.col = col;
   }
 
-  public drawBoard(parent: HTMLElement) {
+  public drawBoard(parent: HTMLElement): void {
     let i = 0;
     let j: number;
     let child: HTMLElement;
@@ -40,7 +45,7 @@ class Chess {
     }
   }
 
-  private setAttr(dom: HTMLElement, attrs: Object) {
+  private setAttr(dom: HTMLElement, attrs: any) {
     for (const key in attrs) {
       attrs.hasOwnProperty(key) && dom.setAttribute(key, attrs[key])
     }
@@ -84,7 +89,7 @@ class Chess {
     parent.classList.add(this.turn === ChessType.Zero ? ChessTypeClass.Zero : ChessTypeClass.One)
   }
 
-  private whoWin(row: number, col: number) {
+  public whoWin(row: number, col: number) {
     let i;
     let j;
     let win = true;
@@ -138,7 +143,7 @@ class Chess {
   }
 }
 
-let ticTacToe = new Chess(3, 3)
+let ticTacToe = new Chess()
 
 ticTacToe.drawBoard(document.querySelector('#app') as HTMLElement)
 
